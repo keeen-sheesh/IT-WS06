@@ -17,7 +17,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Product Data
+// Product Data - Updated with all 12 products
 const products = [
     { id: 1, name: "Vintage Leather Bag", category: "bags", price: "₱250.00", image: "picture/bag1.png" },
     { id: 2, name: "Designer Handbag", category: "bags", price: "₱250.00", image: "picture/bag2.png" },
@@ -30,18 +30,15 @@ const products = [
     { id: 9, name: "Trendy Top", category: "clothes", price: "₱200.00", image: "picture/damit5.png" },
     { id: 10, name: "Classic Sneakers", category: "shoes", price: "₱400.00", image: "picture/sapatos.png" },
     { id: 11, name: "Elegant Heels", category: "shoes", price: "₱300.00", image: "picture/sapatos2.png" },
-    { id: 12, name: "Leather Boots", category: "shoes", price: "₱450.00", image: "picture/bag1.png" }
 ];
 
-// Function to display products
+// Function to display ALL products
 function displayProducts() {
     const productsGrid = document.querySelector('.products-grid');
     productsGrid.innerHTML = '';
     
-    // Display only 8 sample products
-    const sampleProducts = products.slice(0, 8);
-    
-    sampleProducts.forEach(product => {
+    // Display ALL products (not just 8)
+    products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         
@@ -103,6 +100,16 @@ window.addEventListener('scroll', () => {
     });
 });
 
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
 // Add loading animation
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
@@ -119,4 +126,15 @@ window.addEventListener('load', () => {
             section.style.transform = 'translateY(0)';
         }, index * 100);
     });
+    
+    // Update the product count in the section intro
+    const productCount = document.createElement('span');
+    productCount.textContent = ` (${products.length} items)`;
+    productCount.style.color = 'var(--red-medium)';
+    productCount.style.fontWeight = 'bold';
+    
+    const sectionIntro = document.querySelector('#products .section-intro');
+    if (sectionIntro) {
+        sectionIntro.appendChild(productCount);
+    }
 });
